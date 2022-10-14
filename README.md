@@ -79,3 +79,40 @@ pg.perform_column_generation(column_gen_num, column_update_num, network)
 pg.output_columns(network)
 pg.output_link_performance(network)
 ```
+With demad.csv and node.csv, you can find Shortest Paths for All Individual Agents by the following code. Agents are disaggregated demand using the aggregated travel demand between each OD pair, specified in demand.csv. On its first call, individual agents will be automatically set up via find_path_for_agents(). By using function output_agent_paths(network), you will output unique agent paths to a CSV file. If you don't want to include geometry information in the output file, you can use output_agent_paths(network, False).
+```python
+import path4gmns as pg
+pg.read_zones(network)
+pg.load_demand(network)
+network.find_path_for_agents()
+
+agent_id = 300
+print('\norigin node id of agent is '
+      f'{network.get_agent_orig_node_id(agent_id)}')
+print('destination node id of agent is '
+      f'{network.get_agent_dest_node_id(agent_id)}')
+print('shortest path (node id) of agent, '
+      f'{network.get_agent_node_path(agent_id)}')
+print('shortest path (link id) of agent, '
+      f'{network.get_agent_link_path(agent_id)}')
+
+agent_id = 1000
+print('\norigin node id of agent is '
+      f'{network.get_agent_orig_node_id(agent_id)}')
+print('destination node id of agent is '
+      f'{network.get_agent_dest_node_id(agent_id)}')
+print('shortest path (node id) of agent, '
+      f'{network.get_agent_node_path(agent_id)}')
+print('shortest path (link id) of agent, '
+      f'{network.get_agent_link_path(agent_id)}')
+      
+pg.output_agent_paths(network)
+```
+In addition, you can get the Shortest Path between Two Nodes under a specific mode by the following code. But in this case, we don't have such type of path.
+network = pg.read_network()
+```python
+print('\nshortest path (node id) from node 1 to node 2, '
+      +network.find_shortest_path(1, 2, mode='w'))
+print('\nshortest path (link id) from node 1 to node 2, '
+      +network.find_shortest_path(1, 2, mode='w', seq_type='link'))
+```
