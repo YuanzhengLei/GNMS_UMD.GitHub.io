@@ -24,6 +24,15 @@ You can visualize generated networks using [NeXTA](https://github.com/asu-trans-
 Open QGIS and click on menu Layer->Add Layer->Add Delimited Text Layer. In the following dialogue box, load GMNS node.csv and link.csv, and ensure WKT is selected as geometry definition. For more information about how to visualize the generated network in other software, please check [NeXTA](https://github.com/asu-trans-ai-lab/NeXTA4GMNS).
 You can visualize generated networks using NeXTA or QGIS. In this case, we will use QGIS to transfer these two files to a network. Open GMNS node.csv and link.csv in Excel to verify the existence of the geometry field. Open QGIS and click on menu Layer->Add Layer->Add Delimited Text Layer. In the following dialogue box, load GMNS node.csv and link.csv, and ensure WKT is selected as geometry definition. For more information about how to visualize the generated network in other software, please check NeXTA.
 ![Visualizing the generated network: step 1](https://github.com/YuanzhengLei/YuanzhengLei.GitHub.io/blob/main/3.png)
-![Visualizing the generated network: step 2](https://github.com/YuanzhengLei/YuanzhengLei.GitHub.io/blob/main/4.png)
 The generated network is shown as follow:
 ![The generated network](https://github.com/YuanzhengLei/YuanzhengLei.GitHub.io/blob/main/5.png)
+## ***How to use the Path4GMNS package to generate the demand of a network and solve some basic transportation problems?***
+### ***A simple fuction -- find the shortest path.***
+The first thing you need to do is install the Path4GMNS package (Path4GMNS is an open-source, cross-platform, lightweight, and fast Python path engine for networks encoded in GMNS.), because the Path4GMNS has been published on PyPI, so it can be installed using:
+```python
+pip install path4gmns
+```
+If you need a specific version of Path4GMNS, like, 0.8.7a1. It can be installed using:
+```python
+pip install path4gmns==0.8.7a1
+```
