@@ -36,3 +36,46 @@ If you need a specific version of Path4GMNS, like, 0.8.7a1. It can be installed 
 ```python
 pip install path4gmns==0.8.7a1
 ```
+The first useful fuction we are going to introduced is to find the shortest distance path between two nodes. To find the shortest distance path between two nodes, you can use following code:
+```python
+import path4gmns as pg
+network = pg.read_network(load_demand=False)
+print('\nshortest path (node id) from node 1 to node 2, '+network.find_shortest_path(1, 2))
+```
+You can show the path by a sequence of nodes (above code) or links(following code).
+```python
+print('\nshortest path (link id) from node 1 to node 2, '+network.find_shortest_path(1, 2, seq_type='link'))
+```
+You can specify the absolute path or the relative path from your cwd in read_network() to use a particular network from the downloaded sample data set (shown in the following). But in this case, we only focus on the data set that was created by ourselves.
+```python
+pg.download_sample_data_sets()
+network = pg.read_network(load_demand=False, input_dir='data/Chicago_Sketch')
+print('\nshortest path (node id) from node 1 to node 2, '+network.find_shortest_path(1, 2))
+print('\nshortest path (link id) from node 1 to node 2, '+network.find_shortest_path(1, 2, seq_type='link'))
+```
+You can noticed that because we only use the osm2gmns package generated two map files, node.csv and link.csv. So in the function read_network(), we have to set the first parameter load_demand=False. In the following sections, we will show you how to use package path4gmns to generated new map files like the demand file and zone file.
+Before we test and show other more complicated functions, we must generate some important map files -- demand and zone files. It is noted that the current version still has some issues over the default mode ('p' or, equivalently, 'passenger'), which GMNS does not support as a valid mode in allowed_uses. It has been fixed in the incoming version --0.8.6. So generally, you have to replace all the values in column "allowed_uses" in file link.csv with "all." Please ignore if you are currently using Path4gmns 0.8.6 or a later version. 
+```python
+import path4gmns as pg
+from time import time
+network = pg.read_network()
+print('\nstart zone synthesis')
+st = time()
+pg.network_to_zones(network)
+pg.output_zones(network)
+pg.output_synthesized_demand(network)
+print('complete zone and demand synthesis.\n')
+print(f'processing time of zone and demand synthesis: {time()-st:.2f} s')
+```
+The synthesized zones and OD demand matrix will be output as zone.csv and demand.csv, respectively. In addition, they can be loaded as offline files to perform other functionalities from Path4GMNS (e.g., traffic assignment).
+```python
+import path4gmns as pg
+network = pg.read_network()
+pg.read_zones(network)
+pg.load_demand(network)
+column_gen_num = 20
+column_update_num = 20
+pg.perform_column_generation(column_gen_num, column_update_num, network)
+pg.output_columns(network)
+pg.output_link_performance(network)
+```
