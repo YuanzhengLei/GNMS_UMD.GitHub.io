@@ -5,5 +5,5 @@ In this berif introduction, we will shown you how to generate a multi-resolution
 ```python
 pip install osm2gmns
 ```
-Or you can install this package inside your python IDIE, take Pycharm as an example (shown as follow), you can go to->Files->Settings->Python interpreter, and you can install any packages in the right-side window. (http://github.com/yourname/your-repository/raw/master/images-folder/1.png)
+Or you can install this package inside your python IDIE, take Pycharm as an example (shown as follow), you can go to->Files->Settings->Python interpreter, and you can install any packages in the right-side window. (https://github.com/YuanzhengLei/YuanzhengLei.GitHub.io/blob/main/1.png)
 
